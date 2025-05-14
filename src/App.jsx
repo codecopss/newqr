@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import ViewDetails from "./components/ViewDetails";
 import EditProfile from "./components/EditProfile";
 import AdminPanel from "./components/AdminPanel";
+import Landing from './components/Landing';
 import "./App.css";
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+         <Route path="/" element={<Landing />} />
+        <Route path="/home/:userId" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/view/:userId" element={<ViewDetails />} />

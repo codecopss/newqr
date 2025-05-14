@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCurrentUser, getUserData, updateUserData } from "../utils/storage";
 
@@ -6,7 +6,15 @@ const EditProfile = () => {
   const navigate = useNavigate();
   const user = getCurrentUser();
 
-  // Fetch existing data without JSON parsing again
+  // Redirect to login if no user found
+  useEffect(() => {
+    if (!user) {
+      alert("Please log in to edit your profile.");
+      navigate("/login");
+    }
+  }, [user, navigate]);
+
+  // Fetch existing data if user exists
   const initialData = getUserData(user) || {
     name: "",
     contact: "",
@@ -16,13 +24,14 @@ const EditProfile = () => {
   };
 
   const [formData, setFormData] = useState(initialData);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleUpdate = (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
 
     if (!user) {
@@ -30,9 +39,17 @@ const EditProfile = () => {
       return;
     }
 
-    updateUserData(user, formData);
-    alert("Details updated successfully!");
-    navigate("/");
+    setLoading(true);
+
+    try {
+      await updateUserData(user, formData);
+      alert("Details updated successfully!");
+      navigate("/home/" + user); // Redirect to user home
+    } catch (error) {
+      alert("Error updating profile. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -96,7 +113,9 @@ const EditProfile = () => {
           ></textarea>
         </div>
 
-        <button type="submit" className="btn-submit">Update</button>
+        <button type="submit" className="btn-submit" disabled={loading}>
+          {loading ? "Updating..." : "Update"}
+        </button>
       </form>
     </div>
   );

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import QRCode from "qrcode.react";
-import { getCurrentUser, getUserData, logoutUser, updateUserData } from "../utils/storage";
-import { Link, useNavigate } from "react-router-dom";
+import { getUserData, logoutUser, updateUserData } from "../utils/storage";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const Home = () => {
+  const { userId } = useParams(); // Extract userId from URL
   const navigate = useNavigate();
-  const user = getCurrentUser();
   const [qrData, setQrData] = useState("");
   const [formData, setFormData] = useState({
     name: "",
@@ -15,20 +15,20 @@ const Home = () => {
     medicalConditions: "",
   });
 
-  // Fetch user data when component mounts or when user changes
+  // Fetch user data when component mounts or when userId changes
   useEffect(() => {
-    if (user) {
-      const savedData = getUserData(user);
+    if (userId) {
+      const savedData = getUserData(userId);
       console.log("Loaded data for user:", savedData);
       if (savedData) {
         setFormData(savedData);
       }
     }
-  }, [user]);
+  }, [userId]);
 
   const handleGenerateQR = () => {
-    if (user) {
-      setQrData(`/view/${user}`);
+    if (userId) {
+      setQrData(`/view/${userId}`);
     } else {
       alert("Please log in to generate QR");
     }
@@ -46,22 +46,21 @@ const Home = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (user) {
-      updateUserData(user, formData);
+    if (userId) {
+      updateUserData(userId, formData);
       alert("Form data updated successfully!");
     }
   };
 
-  // Get user data for display
-  const userData = getUserData(user);
+  const userData = getUserData(userId);
 
   return (
     <div className="container">
       <h2>Home</h2>
 
-      {user ? (
+      {userId ? (
         <>
-          <h3>Welcome, {user}</h3>
+          <h3>Welcome, {userId}</h3>
 
           {userData ? (
             <div className="user-details">

@@ -9,7 +9,8 @@ const Login = () => {
   const handleLogin = () => {
     const success = loginUser(username);
     if (success) {
-      navigate("/");
+      // Redirect to /home/{username} or /home/{userId}
+      navigate(`/home/${username}`); 
     } else {
       alert("User not found");
     }
