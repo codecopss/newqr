@@ -53,6 +53,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
+    
   },
   header: {
     marginBottom: '40px',
@@ -102,6 +103,8 @@ const styles = {
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
+    width: 'auto',   
+    alignSelf: 'center',
   },
   signupButton: {
     backgroundColor: '#28a745',
@@ -111,6 +114,8 @@ const styles = {
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
+    width: 'auto',   
+    alignSelf: 'center',
   },
   footer: {
     marginTop: '40px',

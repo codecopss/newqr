@@ -18,7 +18,7 @@ const ViewDetails = () => {
       {userData ? (
         <div className="user-details">
           <p><strong>Name:</strong> {userData.name}</p>
-          <p><strong>Contact:</strong> {userData.contact}</p>
+          <p><strong>Emergency Contact:</strong> {userData.contact}</p>
           <p><strong>Blood Type:</strong> {userData.bloodType}</p>
           <p><strong>Allergies:</strong> {userData.allergies}</p>
           <h3>Medical History</h3>

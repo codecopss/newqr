@@ -66,7 +66,7 @@ const Home = () => {
             <div className="user-details">
               <h4>Your Details:</h4>
               <p><strong>Name:</strong> {userData.name}</p>
-              <p><strong>Contact:</strong> {userData.contact}</p>
+              <p><strong>Emergency Contact:</strong> {userData.contact}</p>
               <p><strong>Blood Type:</strong> {userData.bloodType}</p>
               <p><strong>Allergies:</strong> {userData.allergies}</p>
               <p><strong>Medical Conditions:</strong> {userData.medicalConditions}</p>
@@ -88,7 +88,7 @@ const Home = () => {
               />
             </div>
             <div className="form-group">
-              <label>Contact:</label>
+              <label>Emergency Contact:</label>
               <input
                 type="text"
                 name="contact"
