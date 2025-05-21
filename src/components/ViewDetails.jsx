@@ -25,6 +25,22 @@ const ViewDetails = () => {
           <pre style={{ whiteSpace: "pre-wrap", wordWrap: "break-word", fontSize: "1rem", lineHeight: "1.5", fontFamily: "inherit" }}>
             {userData.medicalConditions}
           </pre>
+
+          {userData.image && (
+            <div style={{ marginTop: "10px" }}>
+              <strong>Uploaded Image:</strong><br />
+              <img src={userData.image} alt="Uploaded" width="200" />
+            </div>
+          )}
+
+          {userData.medicalPdf && (
+            <div style={{ marginTop: "10px" }}>
+              <strong>Medical History PDF:</strong><br />
+              <a href={userData.medicalPdf} download="medical-history.pdf" target="_blank" rel="noopener noreferrer">
+                Download PDF
+              </a>
+            </div>
+          )}
         </div>
       ) : (
         <p>User not found</p>
